@@ -13,6 +13,6 @@ namespace SmartBin.Models
         public DateTime Timestamp { get; set; }
         [ForeignKey("Bin")]
         public int BinId { get; set; }
-        public virtual Bin Bin { get; set; }
+        public Bin Bin { get; set; }
     }
 }

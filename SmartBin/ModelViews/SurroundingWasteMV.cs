@@ -1,18 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SmartBin.Models
+﻿namespace SmartBin.ModelViews
 {
-    public class SurroundingWaste
+    public class SurroundingWasteAddMV
     {
-        [Key]
+        public IFormFile? Image { get; set; }
+    }
+
+    public class SurroundingWasteResultMV
+    {
         public int Id { get; set; }
         public string WasteLevel { get; set; }
         public string ImageUrl { get; set; }
         public int DetectedObjectsCount { get; set; }
         public float AiConfidencePercentage { get; set; }
         public DateTime Timestamp { get; set; }
-
-        public int BinId { get; set; }
-        public Bin Bin { get; set; }
     }
 }
