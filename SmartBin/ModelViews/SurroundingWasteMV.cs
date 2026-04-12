@@ -1,6 +1,6 @@
 ﻿namespace SmartBin.ModelViews
 {
-    public class SurroundingWasteAddMV
+    public class SurroundingWasteInsertMV
     {
         public IFormFile? Image { get; set; }
     }

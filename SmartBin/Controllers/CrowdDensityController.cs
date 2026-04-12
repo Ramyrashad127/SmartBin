@@ -9,34 +9,32 @@ namespace SmartBin.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SurroundingWasteController : ControllerBase
+    public class CrowdDensityController : ControllerBase
     {
-        private readonly ISurroundingWasteService _service;
+        private readonly ICrowdDensityService _service;
         private readonly UserManager<AppUser> _userManager;
-        public SurroundingWasteController(ISurroundingWasteService service, UserManager<AppUser> userManager)
+        public CrowdDensityController(ICrowdDensityService service, UserManager<AppUser> userManager)
         {
             _service = service;
             _userManager = userManager;
         }
-
         [HttpGet]
         public async Task<IActionResult> GetLastState(int BinId)
         {
             var user = await _userManager.GetUserAsync(User);
             var result = await _service.GetLastStateAsync(BinId, user);
             if (result == null)
-                return NotFound(new { message = "Bin not found or no surrounding waste data available." });
+                return NotFound(new { message = "Bin not found or no crowd density data available." });
             return Ok(result);
-
         }
         [HttpPost]
-        public async Task<IActionResult> AddSurroundingWaste([FromForm] SurroundingWasteInsertMV waste, [FromHeader(Name = "Token")] string token)
+        public async Task<IActionResult> AddCrowdDensity([FromForm] CrowdDensityInsertMV crowdDensity, [FromHeader(Name = "Token")] string token)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = _service.AddSurroundingWasteAsync(waste, token);
+            var result = _service.AddCrowdDensityAsync(crowdDensity, token);
             if (result == "Bin not found")
                 return NotFound(new { message = result });
             return Ok(new { message = result });

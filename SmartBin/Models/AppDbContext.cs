@@ -11,5 +11,6 @@ namespace SmartBin.Models
         public DbSet<Material> Materials { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<SurroundingWaste> SurroundingWastes { get; set; }
+        public DbSet<CrowdDensity> CrowdDensities { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace SmartBin.Models
         public string DensityLevel { get; set; } // e.g., Low, Medium, High
         public string ImageUrl { get; set; }
         public int PeopleCount { get; set; }
+        public float AiConfidencePercentage { get; set; }
         public DateTime Timestamp { get; set; }
         [ForeignKey("Bin")]
         public int BinId { get; set; }
