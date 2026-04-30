@@ -25,11 +25,17 @@ namespace SmartBin.Services
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _environment;
+        private static Lazy<InferenceSession> _onnxSession;
 
         public TransactionService(AppDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
             _environment = environment;
+            if (_onnxSession == null)
+            {
+                string modelPath = Path.Combine(_environment.ContentRootPath, "AI_Models", "smart_bin_v3_model.onnx");
+                _onnxSession = new Lazy<InferenceSession>(() => new InferenceSession(modelPath));
+            }
         }
 
         public async Task<TransactionResultMV> AddTransactionAsync(TransactionInsertMV transaction, string token)
@@ -112,8 +118,7 @@ namespace SmartBin.Services
 
         public async Task<(string MaterialName, float Confidence)> AnalyzeImageAsync(Stream imageStream)
         {
-            string modelPath = Path.Combine(_environment.ContentRootPath, "AI_Models", "smart_bin_model.onnx");
-            using var session = new InferenceSession(modelPath);
+            var session = _onnxSession.Value;
 
             // NEW: Dynamically grab the exact input name the ONNX model expects!
             string inputName = session.InputMetadata.Keys.First();
@@ -190,13 +195,14 @@ namespace SmartBin.Services
 
         private string GetMaterialNameFromIndex(int index)
         {
-            // IMPORTANT: Because of how Keras loads datasets, these MUST be in ALPHABETICAL order, 
-            // exactly matching the folder names inside your "dataset" directory!
+            // UPDATED: Now matches the 5 folders from your MobileNetV3 dataset!
             string[] classNames = new[]
             {
-                "metal",     // Index 0
-                "paper",     // Index 1
-                "plastic"    // Index 2
+                "glass",     // Index 0
+                "metal",     // Index 1
+                "organic",   // Index 2
+                "paper",     // Index 3
+                "plastic"    // Index 4
             };
 
             if (index >= 0 && index < classNames.Length)

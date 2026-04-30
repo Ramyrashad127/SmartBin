@@ -22,12 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AI_Models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="AI_Models\smart_bin_model.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="AI_Models\smart_bin_v3_model.onnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
