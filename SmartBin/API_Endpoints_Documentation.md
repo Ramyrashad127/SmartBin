@@ -39,16 +39,16 @@ Authenticate a user and receive a token.
 ---
 
 ## ??? BinController
-Base Route: `/api/Bin`
+Base Route: `/api/SmartBin`
 
 ### Create Bin
 Initialize a new blank bin system logic.
-- **Endpoint**: `POST /api/Bin/Create`
+- **Endpoint**: `POST /api/SmartBin/Create`
 - **Response**: `200 OK` with a newly created token string.
 
 ### Assign Bin
 Assign a previously created bin via its token to the authenticated user.
-- **Endpoint**: `POST /api/Bin/Assign`
+- **Endpoint**: `POST /api/SmartBin/Assign`
 - **Authorization**: Required (Bearer Token)
 - **Body** `(JSON)`:
   ```json
@@ -62,7 +62,7 @@ Assign a previously created bin via its token to the authenticated user.
 
 ### Get All Bins
 Retrieve a list of all assigned bins to the current user.
-- **Endpoint**: `GET /api/Bin`
+- **Endpoint**: `GET /api/SmartBin`
 - **Authorization**: Required (Bearer Token)
 - **Response**: `200 OK` with a list of `BinMV`:
   ```json
@@ -77,7 +77,7 @@ Retrieve a list of all assigned bins to the current user.
 
 ### Get Bin Details
 Retrieve details for a specific bin, including its sections, if owned by the user.
-- **Endpoint**: `GET /api/Bin/{Id}`
+- **Endpoint**: `GET /api/SmartBin/{Id}`
 - **Authorization**: Required (Bearer Token)
 - **Route Parameter**: `int Id` (Bin Id)
 - **Response**: 
@@ -86,7 +86,7 @@ Retrieve details for a specific bin, including its sections, if owned by the use
 
 ### Update Bin
 Update geographical coordinates or properties of a bin.
-- **Endpoint**: `PUT /api/Bin/Update`
+- **Endpoint**: `PUT /api/SmartBin/Update`
 - **Header**: `Token` (hardware IdentificationToken)
 - **Body** `(JSON)`:
   ```json
@@ -101,7 +101,7 @@ Update geographical coordinates or properties of a bin.
 
 ### Delete Bin
 Delete an existing bin.
-- **Endpoint**: `DELETE /api/Bin/Delete`
+- **Endpoint**: `DELETE /api/SmartBin/Delete`
 - **Header**: `Token` (hardware IdentificationToken)
 - **Response**: 
   - `200 OK` on success.
@@ -130,7 +130,7 @@ Updates the capacities inside a bin's subsection (e.g., Plastic, Metal).
 
 ### Get All Bin Sections
 Retrieves subsections of a given bin ID.
-- **Endpoint**: `GET /api/BinSection/Bin/{Id}`
+- **Endpoint**: `GET /api/BinSection/SmartBin/{Id}`
 - **Authorization**: Required (Bearer Token)
 - **Route Parameter**: `int Id` (Bin Id)
 - **Response**: 
@@ -192,7 +192,7 @@ Base Route: `/api/Transaction`
 
 ### Get All Transactions For A Bin
 Fetches page-indexed throwing transactions logs related to a user's bin.
-- **Endpoint**: `GET /api/Transaction/bin/{BinId}/page/{PageNumber}`
+- **Endpoint**: `GET /api/Transaction/SmartBin/{BinId}/page/{PageNumber}`
 - **Authorization**: Required (Bearer Token)
 - **Route Parameters**: 
   - `int BinId` 

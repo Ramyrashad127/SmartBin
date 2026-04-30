@@ -21,7 +21,7 @@ namespace SmartBin.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("bin/{BinId}/page/{PageNumber}")]
+        [HttpGet("SmartBin/{BinId}/page/{PageNumber}")]
         [Authorize]
         public async Task<ActionResult<List<TransactionResultMV>>> GetAllTransactions([FromRoute]int BinId, [FromRoute]int PageNumber, int PageSize = 10)
         {

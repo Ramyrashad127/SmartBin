@@ -7,7 +7,7 @@ using SmartBin.ModelViews;
 using SmartBin.Services;
 namespace SmartBin.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/SmartBin")]
     [ApiController]
     public class BinController : ControllerBase
     {

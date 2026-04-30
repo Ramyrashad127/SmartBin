@@ -24,7 +24,7 @@ namespace SmartBin.Controllers
             if (updatedSection == null) return NotFound();
             return Ok(updatedSection);
         }
-        [HttpGet("Bin/{Id}")]
+        [HttpGet("SmartBin/{Id}")]
         [Authorize]
         public async Task<ActionResult<List<BinSectionMV>>> GetAllBinSections([FromRoute] int Id)
         {
