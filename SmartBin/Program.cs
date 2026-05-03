@@ -49,6 +49,18 @@ namespace SmartBin
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
                 };
             });
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin()
+                              .AllowAnyMethod()
+                              .AllowAnyHeader();
+                    });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -64,11 +76,12 @@ namespace SmartBin
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
-
+            builder.Services.AddEndpointsApiExplorer();
             app.Run();
         }
     }
